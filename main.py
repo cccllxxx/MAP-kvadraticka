@@ -9,13 +9,12 @@ def main():
         print("rovnica je linearna, riesim iba kvadraticku")
     elif D <0:
         print(f"Rovnica nema riesenie, diskriminant je {D}")
+    elif D==0:
+        print(f"koren je {x1:.2f} {x2}")
     else:
         x1 = (-b+math.sqrt(D))/(2*a)
         x2 = (-b-math.sqrt(D))/(2*a) 
-        if a==c:
-            print(f"koren je {x1:.2f}")
-        else:
-            print(f"x1 je {x1:.2f}\n x2 je {x2:.2f}")
+        print(f"x1 je {x1:.2f}\nx2 je {x2:.2f}")
         
 if __name__ == "__main__":    
     main()
