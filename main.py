@@ -5,13 +5,13 @@ from common.utils import get_number
 def diskriminant(a:float, b:float, c:float) -> float:
     return b**2 - 4*a*c
 
-def vrat_riesenie(a:float, b:float, c:float):
+def vrat_riesenie(a:float, b:float, c:float) -> tuple[str, None | float] | tuple[str, float, float]:
     """
     funkcia podla diskriminantu zisti riesenia rovnice
     vstupne parametre:
         a,b,c:float - koeficienty rovnice
     navratova hodnota:
-        entica obsahujuca text a vypocitany koren
+        ntica obsahujuca text a vypocitany koren
     """
     D = diskriminant(a,b,c)
     if D <0:
@@ -28,16 +28,32 @@ def vrat_riesenie(a:float, b:float, c:float):
         return "dva", x1, x2
     
     
-def vypis_riesenie()
+def vypis_riesenie(vysledok:tuple) -> None :
+    """
+    vypise riesenie rovnice
+    """
+    match vysledok:
+        case ("ziadny",None):
+            print("Rovnica nema ziadny koren")
+        case ("jeden", x1):
+            print(f"rovnica ma jeden koren, x = {x1}")
+        case ("dva", x1,x2):
+            print(f"rovnica ma 2korene\nx1 = {x1}\nx2 = {x2}")
+        case _:
+            raise ValueError("Neznama n-tica")
 
 
 def main():
-    a = get_number(popis="Zadaj a", nulaPovolena=False)
-    b = get_number(popis="Zadaj b", nulaPovolena=True)
-    c = get_number(popis="Zadaj c", nulaPovolena=True)
+    a = get_number("Zadaj a",-100,100, False)
+    b = get_number("Zadaj b",-100,100, True)
+    c = get_number("Zadaj c",-100,100, True)
     print(f"tvar rovnice je {a}x² {b:+}x {c:+} = 0")
-    
-        
+    riesenie:tuple = vrat_riesenie(a,b,c)
+    vypis_riesenie(riesenie)
+ 
+ 
+ 
+ 
 if __name__ == "__main__":    
     main()
     
